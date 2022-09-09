@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aws_cron_expression_validator"
-version = "0.0.3"
+version = "1.0.0"
 authors = [
   { name="Graham Coster", email="bitjugglers@gmail.com" },
 ]
@@ -20,4 +20,4 @@ classifiers = [
 
 [project.urls]
 "Homepage" = "https://github.com/grumBit/aws_cron_expression_validator"
-"Bug Tracker" = "https://github.com/grumBit/aws_cron_expression_validator"
+"Bug Tracker" = "https://github.com/grumBit/aws_cron_expression_validator/issues"
