@@ -6,7 +6,8 @@ import re
 class AWSCronExpressionValidator:
 
     """
-    Validates these AWS EventBridge cron expressions, which are similar to, but not compatible with unix cron expressions:
+    Validates these AWS EventBridge cron expressions, which are similar to, but not compatible with standard
+    unix cron expressions:
     https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html#eb-cron-expressions
 
     | Field        | Values          | Wildcards     |
@@ -38,7 +39,8 @@ class AWSCronExpressionValidator:
 
         if not ((day_of_month == "?" and day_of_week != "?") or (day_of_month != "?" and day_of_week == "?")):
             raise ValueError(
-                f"Invalid combination of day-of-month '{day_of_month}' and day-of-week '{day_of_week}'. One must be a question mark (?)"
+                f"Invalid combination of day-of-month '{day_of_month}' and day-of-week '{day_of_week}'."
+                "One must be a question mark (?)"
             )
 
         if not re.fullmatch(cls.minute_regex(), minute):
@@ -57,32 +59,32 @@ class AWSCronExpressionValidator:
         return expression
 
     @classmethod
-    def range_regex(cls, values) -> str:
+    def range_regex(cls, values: str) -> str:
         return rf"({values}|(\*\-{values})|({values}\-{values})|({values}\-\*))"  # v , *-v , v-v or v-*
 
     @classmethod
-    def list_regex(cls, values):
+    def list_regex(cls, values: str) -> str:
         range_ = cls.range_regex(values)
         return rf"({range_}(\,{range_})*)"  # One or more ranges separated by a comma
 
     @classmethod
-    def slash_regex(cls, values):
+    def slash_regex(cls, values: str) -> str:
         return rf"((\*|[0-9]*[1-9][0-9]*)?\/{values})"  # Slash can be preceded by nothing, * or a natural number
 
     @classmethod
-    def common_regex(cls, values):
+    def common_regex(cls, values: str) -> str:
         return rf"({cls.list_regex(values)}|\*|{cls.slash_regex(values)})"  # values , - * /
 
     @classmethod
-    def minute_regex(cls):
+    def minute_regex(cls) -> str:
         return rf"^({cls.common_regex(cls.minute_values)})$"  # values , - * /
 
     @classmethod
-    def hour_regex(cls):
+    def hour_regex(cls) -> str:
         return rf"^({cls.common_regex(cls.hour_values)})$"  # values , - * /
 
     @classmethod
-    def day_of_month_regex(cls):
+    def day_of_month_regex(cls) -> str:
         return (
             rf"^({cls.common_regex(cls.month_of_day_values)}|\?|L|{cls.month_of_day_values}W)$"  # values , - * / ? L W
         )

@@ -22,3 +22,17 @@ classifiers = [
 "Homepage" = "https://github.com/grumBit/aws_cron_expression_validator.git"
 "Bug Tracker" = "https://github.com/grumBit/aws_cron_expression_validator/issues"
 "Source" = "https://github.com/grumBit/packaging_tutorial"
+
+[tool.pytest.ini_options]
+addopts = "--cov-report html --cov-report term-missing --cov-fail-under 95"
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.pylint]
+max-line-length = 120
+disable = [
+    "C0114", # (missing-module-docstring)
+    "C0115", # (missing-class-docstring)
+    "C0116", # (missing-function-docstring)
+]

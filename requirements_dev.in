@@ -1,0 +1,7 @@
+-c requirements.txt
+black
+build
+mypy
+pylint
+pytest
+pytest-cov
