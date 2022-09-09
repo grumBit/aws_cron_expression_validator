@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aws_cron_expression_validator"
+version = "0.0.1"
+authors = [
+  { name="Graham Coster", email="bitjugglers@gmail.com" },
+]
+description = "ValidatesAWS EventBridge cron expressions, which are similar to, but not compatible with Unix style cron expressions"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.09"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/grumBit/aws_cron_expression_validator"
+"Bug Tracker" = "https://github.com/grumBit/aws_cron_expression_validator"
