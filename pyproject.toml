@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aws_cron_expression_validator"
-version = "1.0.1"
+version = "1.0.2"
 authors = [
   { name="Graham Coster", email="bitjugglers@gmail.com" },
 ]
@@ -12,6 +12,7 @@ description = "ValidatesAWS EventBridge cron expressions, which are similar to, 
 readme = "README.md"
 requires-python = ">=3.09"
 classifiers = [
+    "Development Status :: 5 - Production/Stable", # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
@@ -20,3 +21,4 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/grumBit/aws_cron_expression_validator.git"
 "Bug Tracker" = "https://github.com/grumBit/aws_cron_expression_validator/issues"
+"Source" = "https://github.com/grumBit/packaging_tutorial"

@@ -1,3 +1,14 @@
+![PyPI](https://img.shields.io/pypi/v/aws_cron_expression_validator)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/aws_cron_expression_validator)
+![GitHub all releases](https://img.shields.io/github/downloads/grumbit/aws_cron_expression_validator/total)
+[![GitHub license](https://img.shields.io/github/license/grumbit/aws_cron_expression_validator)](https://github.com/grumbit/aws_cron_expression_validator/blob/main/LICENSE)
+![PyPI - Implementation](https://img.shields.io/pypi/implementation/aws_cron_expression_validator)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/aws_cron_expression_validator)
+![PyPI - Status](https://img.shields.io/pypi/status/aws_cron_expression_validator)
+[![GitHub issues](https://img.shields.io/github/issues/grumbit/aws_cron_expression_validator)](https://github.com/grumbit/aws_cron_expression_validator/issues)
+[![GitHub forks](https://img.shields.io/github/forks/grumbit/aws_cron_expression_validator)](https://github.com/grumbit/aws_cron_expression_validator/network)
+[![GitHub stars](https://img.shields.io/github/stars/grumbit/aws_cron_expression_validator)](https://github.com/grumbit/aws_cron_expression_validator/stargazers)
+
 # AWSCronExpressionValidator
 
 Validates these [AWS EventBridge cron expressions](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html#eb-cron-expressions), which are similar to, but not compatible with Unix style cron expressions;
