@@ -21,9 +21,26 @@ class TestAWSCronExpressionValidator(TestCase):
         assert not re.fullmatch(regex, match)
 
     def test_slash_regex(self):
-        given_regex = AWSCronExpressionValidator.slash_regex("")
-        given_valid_matches = ["/", "*/", "1/", "01/", "10/", "010/", "123/", "0123/"]
-        given_invalid_matches = ["", "1", "0/", "-1/", "*1/", "1*/", "asdf/", "*asdf/", "asdf*/"]
+        minute_values = r"(0?[0-9]|[1-5][0-9])"  # [0]0-59
+        given_regex = AWSCronExpressionValidator.slash_regex(minute_values)
+        given_valid_matches = ["*/10", "1/10", "0/05", "0/15", "0/30", "55/1"]
+        given_invalid_matches = [
+            "",
+            "/",
+            "1",
+            "0/",
+            "01/",
+            "/10",
+            "*/",
+            "*/-1",
+            "5/0",
+            "*1/10",
+            "5/*10",
+            "5/10*",
+            "5/asdf",
+            "5/*asdf",
+            "5/asdf*",
+        ]
         self._then_matches(given_regex, given_valid_matches)
         self._then_does_not_match(given_regex, given_invalid_matches)
 
@@ -45,8 +62,8 @@ class TestAWSCronExpressionValidator(TestCase):
 
         given_regex = AWSCronExpressionValidator.common_regex(r"[B-Y]")
 
-        given_valid_matches = ["*", "*/D", "/D", "D", "D,F", "F-D", "D-F,J"]
-        given_invalid_matches = ["", "A", "Z", "/", "*B/", "B*/", "BCD/", "*BCD/", "BCD*/"]
+        given_valid_matches = ["*", "D/3", "*/3", "D,F", "F-D", "D-F,J"]
+        given_invalid_matches = ["", "A", "Z", "/", "*B/", "B*/", "BCD/", "*BCD/", "BCD*/", "*/D", "/D"]
         self._then_matches(given_regex, given_valid_matches)
         self._then_does_not_match(given_regex, given_invalid_matches)
 
@@ -94,8 +111,8 @@ class TestAWSCronExpressionValidator(TestCase):
     def test_month_regex(self):
         given_regex = AWSCronExpressionValidator.month_regex()
 
-        given_valid_matches = ["*", "1", "01", "10", "12", "JAN", "FEB", "DEC", "JAN-MAR", "02-MAR", "*-MAR", "2/FEB"]
-        given_invalid_matches = ["0", "13", "600", "-1", "XZY", "JANUARY", ""]
+        given_valid_matches = ["*", "1", "01", "10", "12", "JAN", "FEB", "DEC", "JAN-MAR", "02-MAR", "*-MAR", "FEB/2"]
+        given_invalid_matches = ["0", "13", "600", "-1", "XZY", "JANUARY", "", "2/FEB"]
 
         self._then_matches(given_regex, given_valid_matches)
         self._then_does_not_match(given_regex, given_invalid_matches)
@@ -169,6 +186,14 @@ class TestAWSCronExpressionValidator(TestCase):
             "30 0 ? * MON *",
             "30 7 ? * MON#1 *",
             "30 0 1 JAN,APR,JUL,OCT ? *",
+            "0 10 * * ? *",
+            "5 12 * * ? *",
+            "0 18 ? * MON-FRI *",
+            "0 8 1 * ? *",
+            "0/15 * * * ? *",
+            "0/10 * ? * MON-FRI *",
+            "0/5 8-17 ? * MON-FRI *",
+            "15/65 10 * * ? *",
         ]
 
         invalid_expressions = [
@@ -178,7 +203,7 @@ class TestAWSCronExpressionValidator(TestCase):
             "0 18 32W * ? *",
             "0 18 W * ? *",
             "89 10 * * ? *",
-            "15/65 10 * * ? *",
+            "65/15 10 * * ? *",
             "15/30 10 * * ? 2400",
             "0 9 ? * 2#6 *",
             "0 9 ? * ? *",

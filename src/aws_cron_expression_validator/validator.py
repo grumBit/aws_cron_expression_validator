@@ -69,7 +69,7 @@ class AWSCronExpressionValidator:
 
     @classmethod
     def slash_regex(cls, values: str) -> str:
-        return rf"((\*|[0-9]*[1-9][0-9]*)?\/{values})"  # Slash can be preceded by nothing, * or a natural number
+        return rf"((\*|{values})\/[0-9]*[1-9][0-9]*)"  # Slash can be preceded by * or a valid value. It must be followed by an increment natural number
 
     @classmethod
     def common_regex(cls, values: str) -> str:
