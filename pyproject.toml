@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aws_cron_expression_validator"
-version = "1.0.6"
+version = "1.0.7"
 authors = [
   { name="Graham Coster", email="bitjugglers@gmail.com" },
 ]
 description = "ValidatesAWS EventBridge cron expressions, which are similar to, but not compatible with Unix style cron expressions"
 readme = "README.md"
-requires-python = ">=3.09"
+requires-python = ">=3.7"
 classifiers = [
     "Development Status :: 5 - Production/Stable", # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
     "Programming Language :: Python :: 3",
