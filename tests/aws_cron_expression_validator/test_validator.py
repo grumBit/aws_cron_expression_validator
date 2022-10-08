@@ -2,7 +2,7 @@ import re
 from typing import List
 from unittest import TestCase
 
-from src.aws_cron_expression_validator.validator import AWSCronExpressionValidator
+from src.aws_cron_expression_validator import validator
 
 
 class TestAWSCronExpressionValidator(TestCase):
@@ -22,7 +22,7 @@ class TestAWSCronExpressionValidator(TestCase):
 
     def test_slash_regex(self):
         minute_values = r"(0?[0-9]|[1-5][0-9])"  # [0]0-59
-        given_regex = AWSCronExpressionValidator.slash_regex(minute_values)
+        given_regex = validator.AWSCronExpressionValidator.slash_regex(minute_values)
         given_valid_matches = ["*/10", "1/10", "0/05", "0/15", "0/30", "55/1"]
         given_invalid_matches = [
             "",
@@ -45,14 +45,14 @@ class TestAWSCronExpressionValidator(TestCase):
         self._then_does_not_match(given_regex, given_invalid_matches)
 
     def test_range_regex(self):
-        given_regex = AWSCronExpressionValidator.range_regex(r"[B-Y]")
+        given_regex = validator.AWSCronExpressionValidator.range_regex(r"[B-Y]")
         given_valid_matches = ["B", "*-D", "D-*", "B-Y", "D-F", "D-B"]
         given_invalid_matches = ["*-*", "*B", "A-D", "D-Z", "B-C-D", ""]
         self._then_matches(given_regex, given_valid_matches)
         self._then_does_not_match(given_regex, given_invalid_matches)
 
     def test_list_regex(self):
-        given_regex = AWSCronExpressionValidator.list_regex(r"[B-Y]")
+        given_regex = validator.AWSCronExpressionValidator.list_regex(r"[B-Y]")
         given_valid_matches = ["D", "D,F", "F-D", "D,F,C,J", "D-F,J", "B,D-F,J", "D,F-J", "*-R,X", "R,X-*", "*-R,T,X-*"]
         given_invalid_matches = ["*,P", "P,*,Q", "Q-P,*", "", "D,F,", ",D,F", ""]
         self._then_matches(given_regex, given_valid_matches)
@@ -60,7 +60,7 @@ class TestAWSCronExpressionValidator(TestCase):
 
     def test_common_regex(self):
 
-        given_regex = AWSCronExpressionValidator.common_regex(r"[B-Y]")
+        given_regex = validator.AWSCronExpressionValidator.common_regex(r"[B-Y]")
 
         given_valid_matches = ["*", "D/3", "*/3", "D,F", "F-D", "D-F,J"]
         given_invalid_matches = ["", "A", "Z", "/", "*B/", "B*/", "BCD/", "*BCD/", "BCD*/", "*/D", "/D"]
@@ -68,7 +68,7 @@ class TestAWSCronExpressionValidator(TestCase):
         self._then_does_not_match(given_regex, given_invalid_matches)
 
     def test_minute_regex(self):
-        given_regex = AWSCronExpressionValidator.minute_regex()
+        given_regex = validator.AWSCronExpressionValidator.minute_regex()
 
         given_valid_matches = ["*", "0", "1", "01", "10", "59"]
         given_invalid_matches = ["60", "600", "-1", ""]
@@ -77,14 +77,14 @@ class TestAWSCronExpressionValidator(TestCase):
         self._then_does_not_match(given_regex, given_invalid_matches)
 
     def test_hour_regex(self):
-        given_regex = AWSCronExpressionValidator.hour_regex()
+        given_regex = validator.AWSCronExpressionValidator.hour_regex()
         given_valid_matches = ["*", "0", "1", "01", "10", "23"]
         given_invalid_matches = ["24", "600", "001", "-1"]
         self._then_matches(given_regex, given_valid_matches)
         self._then_does_not_match(given_regex, given_invalid_matches)
 
     def test_day_of_month_regex(self):
-        given_regex = AWSCronExpressionValidator.day_of_month_regex()
+        given_regex = validator.AWSCronExpressionValidator.day_of_month_regex()
         given_valid_matches = ["*", "1", "01", "10", "23", "31", "?", "L", "1W", "31W", "11W"]
         given_invalid_matches = [
             "0",
@@ -109,7 +109,7 @@ class TestAWSCronExpressionValidator(TestCase):
         self._then_does_not_match(given_regex, given_invalid_matches)
 
     def test_month_regex(self):
-        given_regex = AWSCronExpressionValidator.month_regex()
+        given_regex = validator.AWSCronExpressionValidator.month_regex()
 
         given_valid_matches = ["*", "1", "01", "10", "12", "JAN", "FEB", "DEC", "JAN-MAR", "02-MAR", "*-MAR", "FEB/2"]
         given_invalid_matches = ["0", "13", "600", "-1", "XZY", "JANUARY", "", "2/FEB"]
@@ -118,7 +118,7 @@ class TestAWSCronExpressionValidator(TestCase):
         self._then_does_not_match(given_regex, given_invalid_matches)
 
     def test_day_of_week_regex(self):
-        given_regex = AWSCronExpressionValidator.day_of_week_regex()
+        given_regex = validator.AWSCronExpressionValidator.day_of_week_regex()
         given_valid_matches = ["*", "1", "5", "7", "MON", "?", "L", "3#2", "MON-FRI"]
         given_invalid_matches = [
             "Monday",
@@ -153,7 +153,7 @@ class TestAWSCronExpressionValidator(TestCase):
         self._then_does_not_match(given_regex, given_invalid_matches)
 
     def test_year_regex(self):
-        given_regex = AWSCronExpressionValidator.year_regex()
+        given_regex = validator.AWSCronExpressionValidator.year_regex()
 
         given_valid_matches = ["*", "1970", "2199", "2022", "1992"]
         given_invalid_matches = ["1969", "2200", "2222", "1111", "20221", "0", "1", "", "*1970", "19*70"]
@@ -196,26 +196,26 @@ class TestAWSCronExpressionValidator(TestCase):
             "15/65 10 * * ? *",
         ]
 
-        invalid_expressions = [
-            "0 18 ? * MON-FRI",
-            "0 18 * * * *",
-            "0 65 * * ? *",
-            "0 18 32W * ? *",
-            "0 18 W * ? *",
-            "89 10 * * ? *",
-            "65/15 10 * * ? *",
-            "15/30 10 * * ? 2400",
-            "0 9 ? * 2#6 *",
-            "0 9 ? * ? *",
-            "10 10 31 04,09,13 ? *",
-            "0,5 07/12 ? * 01,05,8 *",
-            "0,5 07/12 ? * 01,05,7 2000-2200",
+        invalid_expression_exceptions = [
+            ("0 18 ? * MON-FRI", validator.AWSCronExpressionError),
+            ("0 18 * * * *", validator.AWSCronExpressionError),
+            ("89 10 * * ? *", validator.AWSCronExpressionMinuteError),
+            ("65/15 10 * * ? *", validator.AWSCronExpressionMinuteError),
+            ("0 65 * * ? *", validator.AWSCronExpressionHourError),
+            ("0 18 32W * ? *", validator.AWSCronExpressionDayOfMonthError),
+            ("0 18 W * ? *", validator.AWSCronExpressionDayOfMonthError),
+            ("10 10 31 04,09,13 ? *", validator.AWSCronExpressionMonthError),
+            ("0 9 ? * 2#6 *", validator.AWSCronExpressionDayOfWeekError),
+            ("0,5 07/12 ? * 01,05,8 *", validator.AWSCronExpressionDayOfWeekError),
+            ("0,5 07/12 ? * 1 2000-2200", validator.AWSCronExpressionYearError),
+            ("15/30 10 * * ? 2400", validator.AWSCronExpressionYearError),
+            ("0 9 ? * ? *", validator.AWSCronExpressionError),
         ]
 
         for valid_expression in valid_expressions:
-            self.assertEqual(AWSCronExpressionValidator.validate(valid_expression), valid_expression)
+            self.assertEqual(validator.AWSCronExpressionValidator.validate(valid_expression), valid_expression)
 
-        for invalid_expression in invalid_expressions:
+        for invalid_expression, exception in invalid_expression_exceptions:
             print(invalid_expression)
-            with self.assertRaises(ValueError):
-                AWSCronExpressionValidator.validate(invalid_expression)
+            with self.assertRaises(exception):
+                validator.AWSCronExpressionValidator.validate(invalid_expression)

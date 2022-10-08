@@ -3,6 +3,34 @@ from __future__ import annotations
 import re
 
 
+class AWSCronExpressionError(ValueError):
+    pass
+
+
+class AWSCronExpressionMinuteError(AWSCronExpressionError):
+    pass
+
+
+class AWSCronExpressionHourError(AWSCronExpressionError):
+    pass
+
+
+class AWSCronExpressionMonthError(AWSCronExpressionError):
+    pass
+
+
+class AWSCronExpressionYearError(AWSCronExpressionError):
+    pass
+
+
+class AWSCronExpressionDayOfMonthError(AWSCronExpressionError):
+    pass
+
+
+class AWSCronExpressionDayOfWeekError(AWSCronExpressionError):
+    pass
+
+
 class AWSCronExpressionValidator:
 
     """
@@ -33,28 +61,30 @@ class AWSCronExpressionValidator:
 
         value_count = len(expression.split(" "))
         if value_count != 6:
-            raise ValueError(f"Incorrect number of values in '{expression}'. 6 required, {value_count} provided.")
+            raise AWSCronExpressionError(
+                f"Incorrect number of values in '{expression}'. 6 required, {value_count} provided."
+            )
 
         minute, hour, day_of_month, month, day_of_week, year = expression.split(" ")
 
         if not ((day_of_month == "?" and day_of_week != "?") or (day_of_month != "?" and day_of_week == "?")):
-            raise ValueError(
+            raise AWSCronExpressionError(
                 f"Invalid combination of day-of-month '{day_of_month}' and day-of-week '{day_of_week}'."
                 "One must be a question mark (?)"
             )
 
         if not re.fullmatch(cls.minute_regex(), minute):
-            raise ValueError(f"Invalid minute value '{minute}'.")
+            raise AWSCronExpressionMinuteError(f"Invalid minute value '{minute}'.")
         if not re.fullmatch(cls.hour_regex(), hour):
-            raise ValueError(f"Invalid hour value '{hour}'.")
+            raise AWSCronExpressionHourError(f"Invalid hour value '{hour}'.")
         if not re.fullmatch(cls.day_of_month_regex(), day_of_month):
-            raise ValueError(f"Invalid day-of-month value '{day_of_month}'.")
+            raise AWSCronExpressionDayOfMonthError(f"Invalid day-of-month value '{day_of_month}'.")
         if not re.fullmatch(cls.month_regex(), month):
-            raise ValueError(f"Invalid month value '{month}'.")
+            raise AWSCronExpressionMonthError(f"Invalid month value '{month}'.")
         if not re.fullmatch(cls.day_of_week_regex(), day_of_week):
-            raise ValueError(f"Invalid day-of-week value '{day_of_week}'.")
+            raise AWSCronExpressionDayOfWeekError(f"Invalid day-of-week value '{day_of_week}'.")
         if not re.fullmatch(cls.year_regex(), year):
-            raise ValueError(f"Invalid year value '{year}'.")
+            raise AWSCronExpressionYearError(f"Invalid year value '{year}'.")
 
         return expression
 
