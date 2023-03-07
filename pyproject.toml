@@ -22,6 +22,7 @@ classifiers = [
 "Homepage" = "https://github.com/grumBit/aws_cron_expression_validator.git"
 "Bug Tracker" = "https://github.com/grumBit/aws_cron_expression_validator/issues"
 "Source" = "https://github.com/grumBit/aws_cron_expression_validator"
+"Security Policy" = "https://github.com/grumbit/aws_cron_expression_validator/blob/master/SECURITY.md"
 
 [tool.pytest.ini_options]
 addopts = "--cov-report html --cov-report term-missing --cov-fail-under 95"
