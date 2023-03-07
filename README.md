@@ -1,7 +1,7 @@
 ![PyPI](https://img.shields.io/pypi/v/aws_cron_expression_validator)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/aws_cron_expression_validator)
 ![GitHub all releases](https://img.shields.io/github/downloads/grumbit/aws_cron_expression_validator/total)
-[![GitHub license](https://img.shields.io/github/license/grumbit/aws_cron_expression_validator)](https://github.com/grumbit/aws_cron_expression_validator/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/grumbit/aws_cron_expression_validator)](https://github.com/grumbit/aws_cron_expression_validator/blob/master/LICENSE)
 ![PyPI - Implementation](https://img.shields.io/pypi/implementation/aws_cron_expression_validator)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/aws_cron_expression_validator)
 ![PyPI - Status](https://img.shields.io/pypi/status/aws_cron_expression_validator)
