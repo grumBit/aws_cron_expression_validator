@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aws_cron_expression_validator"
-version = "1.0.9"
+version = "1.0.10"
 authors = [
   { name="Graham Coster", email="bitjugglers@gmail.com" },
 ]
@@ -22,6 +22,7 @@ classifiers = [
 "Homepage" = "https://github.com/grumBit/aws_cron_expression_validator.git"
 "Bug Tracker" = "https://github.com/grumBit/aws_cron_expression_validator/issues"
 "Source" = "https://github.com/grumBit/aws_cron_expression_validator"
+"Security Policy" = "https://github.com/grumbit/aws_cron_expression_validator/blob/master/SECURITY.md"
 
 [tool.pytest.ini_options]
 addopts = "--cov-report html --cov-report term-missing --cov-fail-under 95"
