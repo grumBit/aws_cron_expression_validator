@@ -194,6 +194,10 @@ class TestAWSCronExpressionValidator(TestCase):
             "0/10 * ? * MON-FRI *",
             "0/5 8-17 ? * MON-FRI *",
             "15/65 10 * * ? *",
+            "0 11-23/2 * * ? *",
+            "0 11-23/4 ? * 2-6 *",
+            "0 11-23/2 * * ? *",
+            "0 0 1 1-12/3 ? *",
         ]
 
         invalid_expression_exceptions = [
