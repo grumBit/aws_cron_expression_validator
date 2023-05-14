@@ -101,7 +101,7 @@ class AWSCronExpressionValidator:
     def slash_regex(cls, values: str) -> str:
         range_ = cls.range_regex(values)
         return rf"((\*|{range_}|{values})\/[0-9]*[1-9][0-9]*)"
-        # Slash can be preceded by *, range, or a valid value and must be followed by an natural 
+        # Slash can be preceded by *, range, or a valid value and must be followed by an natural
         # number as the increment.
 
     @classmethod
