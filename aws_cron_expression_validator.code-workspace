@@ -1,10 +1,10 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-	],
-	"settings": {
-		"python.dataScience.debugJustMyCode": false
-	}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.linting.flake8Enabled": false
+  }
 }
