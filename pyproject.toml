@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aws_cron_expression_validator"
-version = "1.1.5"
+version = "1.1.6"
 authors = [
   { name="Graham Coster", email="bitjugglers@gmail.com" },
 ]
