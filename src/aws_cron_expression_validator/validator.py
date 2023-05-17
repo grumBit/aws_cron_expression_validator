@@ -55,6 +55,7 @@ class AWSCronExpressionValidator:
     day_of_week_values = r"([1-7]|SUN|MON|TUE|WED|THU|FRI|SAT)"  # 1-7 or SAT-SUN
     day_of_week_hash = rf"({day_of_week_values}#[1-5])"  # Day of the week in the Nth week of the month
     year_values = r"((19[7-9][0-9])|(2[0-1][0-9][0-9]))"  # 1970-2199
+    natural_number = r"([0-9]*[1-9][0-9]*)"  # Integers greater than 0
 
     @classmethod
     def validate(cls, expression: str) -> str:
@@ -100,8 +101,8 @@ class AWSCronExpressionValidator:
     @classmethod
     def slash_regex(cls, values: str) -> str:
         range_ = cls.range_regex(values)
-        return rf"((\*|{range_}|{values})\/[0-9]*[1-9][0-9]*)"
-        # Slash can be preceded by *, range, or a valid value and must be followed by an natural
+        return rf"((\*|{range_}|{values})\/{cls.natural_number})"
+        # Slash can be preceded by *, range, or a valid value and must be followed by a natural
         # number as the increment.
 
     @classmethod
@@ -132,4 +133,4 @@ class AWSCronExpressionValidator:
 
     @classmethod
     def year_regex(cls):
-        return rf"^({cls.common_regex(cls.year_values)}|\?|L)$"  # values , - * /
+        return rf"^({cls.common_regex(cls.year_values)})$"  # values , - * /

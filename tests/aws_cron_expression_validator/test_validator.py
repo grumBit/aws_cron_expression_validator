@@ -71,7 +71,7 @@ class TestAWSCronExpressionValidator(TestCase):
         given_regex = validator.AWSCronExpressionValidator.minute_regex()
 
         given_valid_matches = ["*", "0", "1", "01", "10", "59"]
-        given_invalid_matches = ["60", "600", "-1", ""]
+        given_invalid_matches = ["60", "600", "-1", "", "?", "L", "W", "#"]
 
         self._then_matches(given_regex, given_valid_matches)
         self._then_does_not_match(given_regex, given_invalid_matches)
@@ -79,7 +79,7 @@ class TestAWSCronExpressionValidator(TestCase):
     def test_hour_regex(self):
         given_regex = validator.AWSCronExpressionValidator.hour_regex()
         given_valid_matches = ["*", "0", "1", "01", "10", "23"]
-        given_invalid_matches = ["24", "600", "001", "-1"]
+        given_invalid_matches = ["24", "600", "001", "-1", "?", "L", "W", "#"]
         self._then_matches(given_regex, given_valid_matches)
         self._then_does_not_match(given_regex, given_invalid_matches)
 
@@ -103,6 +103,7 @@ class TestAWSCronExpressionValidator(TestCase):
             "*/8W",
             "?W",
             "",
+            "#",
         ]
 
         self._then_matches(given_regex, given_valid_matches)
@@ -112,7 +113,7 @@ class TestAWSCronExpressionValidator(TestCase):
         given_regex = validator.AWSCronExpressionValidator.month_regex()
 
         given_valid_matches = ["*", "1", "01", "10", "12", "JAN", "FEB", "DEC", "JAN-MAR", "02-MAR", "*-MAR", "FEB/2"]
-        given_invalid_matches = ["0", "13", "600", "-1", "XZY", "JANUARY", "", "2/FEB"]
+        given_invalid_matches = ["0", "13", "600", "-1", "XZY", "JANUARY", "", "2/FEB", "?", "L", "W", "#"]
 
         self._then_matches(given_regex, given_valid_matches)
         self._then_does_not_match(given_regex, given_invalid_matches)
@@ -148,6 +149,7 @@ class TestAWSCronExpressionValidator(TestCase):
             "3#2,5#3",
             "3#2-4#2",
             "",
+            "W",
         ]
         self._then_matches(given_regex, given_valid_matches)
         self._then_does_not_match(given_regex, given_invalid_matches)
@@ -156,7 +158,22 @@ class TestAWSCronExpressionValidator(TestCase):
         given_regex = validator.AWSCronExpressionValidator.year_regex()
 
         given_valid_matches = ["*", "1970", "2199", "2022", "1992"]
-        given_invalid_matches = ["1969", "2200", "2222", "1111", "20221", "0", "1", "", "*1970", "19*70"]
+        given_invalid_matches = [
+            "1969",
+            "2200",
+            "2222",
+            "1111",
+            "20221",
+            "0",
+            "1",
+            "",
+            "*1970",
+            "19*70",
+            "?",
+            "L",
+            "W",
+            "#",
+        ]
 
         self._then_matches(given_regex, given_valid_matches)
         self._then_does_not_match(given_regex, given_invalid_matches)
