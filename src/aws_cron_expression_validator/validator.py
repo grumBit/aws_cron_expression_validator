@@ -101,9 +101,12 @@ class AWSCronExpressionValidator:
     @classmethod
     def slash_regex(cls, values: str) -> str:
         range_ = cls.range_regex(values)
-        return rf"((\*|{range_}|{values})\/{cls.natural_number})"
+        # return rf"((\*|{range_}|{values})\/{cls.natural_number})" # OG
+        return rf"((\*|{range_}|{values})\/{cls.natural_number}\,?)+"
         # Slash can be preceded by *, range, or a valid value and must be followed by a natural
         # number as the increment.
+        # List of slash pattern allowed, e.g. hours 1-7/2,11-23/2 means
+        # "every two hours between 1am and 7am, plus every two hours between 11am and 11pm."
 
     @classmethod
     def common_regex(cls, values: str) -> str:

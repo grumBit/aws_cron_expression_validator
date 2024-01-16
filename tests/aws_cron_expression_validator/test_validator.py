@@ -23,7 +23,7 @@ class TestAWSCronExpressionValidator(TestCase):
     def test_slash_regex(self):
         minute_values = r"(0?[0-9]|[1-5][0-9])"  # [0]0-59
         given_regex = validator.AWSCronExpressionValidator.slash_regex(minute_values)
-        given_valid_matches = ["*/10", "1/10", "0/05", "0/15", "0/30", "55/1"]
+        given_valid_matches = ["*/10", "1/10", "0/05", "0/15", "0/30", "55/1", "1-7/2", "1-7/2,11-23/2", "*/10,*/3"]
         given_invalid_matches = [
             "",
             "/",
@@ -215,6 +215,7 @@ class TestAWSCronExpressionValidator(TestCase):
             "0 11-23/4 ? * 2-6 *",
             "0 11-23/2 * * ? *",
             "0 0 1 1-12/3 ? *",
+            "0 1-7/2,11-23/2 * * ? *"
         ]
 
         invalid_expression_exceptions = [
