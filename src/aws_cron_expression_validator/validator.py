@@ -94,7 +94,7 @@ class AWSCronExpressionValidator:
         return rf"({values}|(\*\-{values})|({values}\-{values})|({values}\-\*))"  # v , *-v , v-v or v-*
 
     @classmethod
-    def list_regex(cls, values: str) -> str:
+    def list_range_regex(cls, values: str) -> str:
         range_ = cls.range_regex(values)
         return rf"({range_}(\,{range_})*)"  # One or more ranges separated by a comma
 
@@ -106,8 +106,14 @@ class AWSCronExpressionValidator:
         # number as the increment.
 
     @classmethod
+    def list_slash_regex(cls, values: str) -> str:
+        slash = cls.slash_regex(values)
+        slash_or_range = rf"({slash}|{cls.range_regex(values)})"
+        return rf"({slash_or_range}(\,{slash_or_range})*)"  # One or more separated by a comma
+
+    @classmethod
     def common_regex(cls, values: str) -> str:
-        return rf"({cls.list_regex(values)}|\*|{cls.slash_regex(values)})"  # values , - * /
+        return rf"({cls.list_range_regex(values)}|\*|{cls.list_slash_regex(values)})"  # values , - * /
 
     @classmethod
     def minute_regex(cls) -> str:
@@ -129,7 +135,8 @@ class AWSCronExpressionValidator:
 
     @classmethod
     def day_of_week_regex(cls):
-        return rf"^({cls.list_regex(cls.day_of_week_values)}|\*|\?|L|{cls.day_of_week_hash})$"  # values , - * ? L #
+        range_list = cls.list_range_regex(cls.day_of_week_values)
+        return rf"^({range_list}|\*|\?|{cls.day_of_week_values}L|L|{cls.day_of_week_hash})$"  # values , - * ? L #
 
     @classmethod
     def year_regex(cls):
