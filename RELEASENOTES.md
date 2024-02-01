@@ -3,7 +3,7 @@
 ### v1.1.9 [2024-02-01]
 
 - Fixes;
-  - [Does not support "last day of the month" suffixes](https://github.com/grumBit/aws_cron_expression_validator/issues/12#issuecomment-1920567609)
+  - [Does not support "last day of the week" suffixes](https://github.com/grumBit/aws_cron_expression_validator/issues/12#issuecomment-1920567609)
 
 ### v1.1.8 [2024-02-01]
 
