@@ -1,6 +1,6 @@
 # Release History
 
-### v1.1.7 [2024-02-01]
+### v1.1.8 [2024-02-01]
 
 - Fixes;
   - [Does not support "last Wednesday of the month" syntax](https://github.com/grumBit/aws_cron_expression_validator/issues/12)
