@@ -129,7 +129,7 @@ class TestAWSCronExpressionValidator(TestCase):
 
     def test_day_of_week_regex(self):
         given_regex = validator.AWSCronExpressionValidator.day_of_week_regex()
-        given_valid_matches = ["*", "1", "5", "7", "MON", "?", "L", "5L", "MONL", "3#2", "MON-FRI"]
+        given_valid_matches = ["*", "1", "5", "7", "MON", "?", "L", "5L", "MONL", "3#2", "MON-FRI", "L-1", "L-7"]
         given_invalid_matches = [
             "Monday",
             "0",
@@ -138,6 +138,9 @@ class TestAWSCronExpressionValidator(TestCase):
             "?5",
             "5?",
             "5-L",
+            "L-0",
+            "L-8",
+            "L-",
             "L5",
             "#",
             "0#2",
@@ -229,6 +232,8 @@ class TestAWSCronExpressionValidator(TestCase):
             "30 0 1 JAN-APR,JUL-OCT/2,DEC ? *",
             "15 10 ? * L 2019-2022",
             "15 10 ? * 6L 2019-2022",
+            "15 10 ? * FRIL 2019-2022",
+            "15 10 ? * L-2 2019-2022",
         ]
 
         invalid_expression_exceptions = [
@@ -246,6 +251,7 @@ class TestAWSCronExpressionValidator(TestCase):
             ("15/30 10 * * ? 2400", validator.AWSCronExpressionYearError),
             ("0 9 ? * ? *", validator.AWSCronExpressionError),
             ("0 18 3L * ? *", validator.AWSCronExpressionDayOfMonthError),
+            ("0 18 L-3 * ? *", validator.AWSCronExpressionDayOfMonthError),
             ("0 1-7/2,11-23/2, * * ? *", validator.AWSCronExpressionHourError),
         ]
 
