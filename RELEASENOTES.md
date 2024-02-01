@@ -1,5 +1,10 @@
 # Release History
 
+### v1.1.10 [2024-02-01]
+
+- Fixes;
+  - [Doesn't allow LW in day of month, or mixed case for months and days](https://github.com/grumBit/aws_cron_expression_validator/issues/18)
+
 ### v1.1.9 [2024-02-01]
 
 - Fixes;

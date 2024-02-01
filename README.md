@@ -13,14 +13,16 @@
 
 Validates these [AWS EventBridge cron expressions](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html#eb-cron-expressions), which are similar to, but not compatible with Unix style cron expressions;
 
-| Field        | Values          | Wildcards     |
-| :----------: | :-------------: | :-----------: |
-| Minute       | 0-59            | , - * /       |
-| Hour         | 0-23            | , - * /       |
-| Day-of-month | 1-31            | , - * ? / L W |
-| Month        | 1-12 or JAN-DEC | , - * /       |
-| Day-of-week  |  1-7 or SUN-SAT | , - * ? L #   |
-| Year         | 1970-2199       | , - * /       |
+| Field        | Values          | Wildcards      |
+| :----------- | :-------------- | :------------- |
+| Minute       | 0-59            | , - \* /       |
+| Hour         | 0-23            | , - \* /       |
+| Day-of-month | 1-31            | , - \* ? / L W |
+| Month        | 1-12 or JAN-DEC | , - \* /       |
+| Day-of-week  | 1-7 or SUN-SAT  | , - \* ? L #   |
+| Year         | 1970-2199       | , - \* /       |
+
+_NB: It appears AWS is supporting the Quartz Job Scheduler cron expressions. More details than AWS provides is available in the [Cron Trigger Tutorial](http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html)._
 
 This was inspired by Niloy Chakraborty's [AWSCronValidator.py](https://gist.github.com/ultrasonex/e1fdb8354408a56df91aa4902d17aa6a) project.
 
