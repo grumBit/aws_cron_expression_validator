@@ -136,7 +136,7 @@ class AWSCronExpressionValidator:
     @classmethod
     def day_of_week_regex(cls):
         range_list = cls.list_range_regex(cls.day_of_week_values)
-        return rf"^({range_list}|\*|\?|{cls.day_of_week_values}L|L|L-[1-7]|{cls.day_of_week_hash})$"  
+        return rf"^({range_list}|\*|\?|{cls.day_of_week_values}L|L|L-[1-7]|{cls.day_of_week_hash})$"
         # values , - * ? L #
 
     @classmethod
