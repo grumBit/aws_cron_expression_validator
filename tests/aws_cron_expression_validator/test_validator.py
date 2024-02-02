@@ -47,7 +47,6 @@ class TestAWSCronExpressionValidator(TestCase):
 
     def test_list_slash_regex(self):
         given_regex = validator.AWSCronExpressionValidator.list_slash_regex(r"[B-Y]")
-        given_valid_matches = ["B", "B/2,C-D/2", "*/10,*/3"]
         given_valid_matches = ["B/2", "B/2,C/2", "B/2,C/2,D/2", "*/10,*/3", "B,C/2,D/2", "B/2,C,D/2", "C/2,D-T/2"]
         given_invalid_matches = ["*/10,*/3,"]
         self._then_matches(given_regex, given_valid_matches)
