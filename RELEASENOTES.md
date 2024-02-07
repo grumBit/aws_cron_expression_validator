@@ -1,5 +1,10 @@
 # Release History
 
+### v1.1.11 [2024-02-08]
+
+- Fixes;
+  - [Latest version 1.1.10 does not seem to work with Python 3.12](https://github.com/grumBit/aws_cron_expression_validator/issues/20)
+
 ### v1.1.10 [2024-02-01]
 
 - Fixes;

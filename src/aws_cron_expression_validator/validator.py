@@ -51,8 +51,8 @@ class AWSCronExpressionValidator:
     minute_values = r"(0?[0-9]|[1-5][0-9])"  # [0]0-59
     hour_values = r"(0?[0-9]|1[0-9]|2[0-3])"  # [0]0-23
     month_of_day_values = r"(0?[1-9]|[1-2][0-9]|3[0-1])"  # [0]1-31
-    month_values = r"(?i)(0?[1-9]|1[0-2]|JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"  # [0]1-12 or JAN-DEC
-    day_of_week_values = r"(?i)([1-7]|SUN|MON|TUE|WED|THU|FRI|SAT)"  # 1-7 or SAT-SUN
+    month_values = r"(?i:0?[1-9]|1[0-2]|JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"  # [0]1-12 or JAN-DEC
+    day_of_week_values = r"(?i:[1-7]|SUN|MON|TUE|WED|THU|FRI|SAT)"  # 1-7 or SAT-SUN
     day_of_week_hash = rf"({day_of_week_values}#[1-5])"  # Day of the week in the Nth week of the month
     year_values = r"((19[7-9][0-9])|(2[0-1][0-9][0-9]))"  # 1970-2199
     natural_number = r"([0-9]*[1-9][0-9]*)"  # Integers greater than 0
