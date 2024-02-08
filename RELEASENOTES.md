@@ -1,6 +1,6 @@
 # Release History
 
-### v1.1.12 [2024-02-08]
+### v1.1.13 [2024-02-08]
 
 - Documentation change only;
   - Remove stale Snyk advisor package health reporting
