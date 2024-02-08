@@ -7,7 +7,6 @@
 [![GitHub license](https://img.shields.io/github/license/grumbit/aws_cron_expression_validator)](https://github.com/grumbit/aws_cron_expression_validator/blob/master/LICENSE)
 [![GitHub forks](https://img.shields.io/github/forks/grumbit/aws_cron_expression_validator)](https://github.com/grumbit/aws_cron_expression_validator/network)
 [![GitHub stars](https://img.shields.io/github/stars/grumbit/aws_cron_expression_validator)](https://github.com/grumbit/aws_cron_expression_validator/stargazers)
-[![Package health](https://snyk.io/advisor/python/aws-cron-expression-validator/badge.svg)](https://snyk.io/advisor/python/aws-cron-expression-validator)
 
 # AWSCronExpressionValidator
 
