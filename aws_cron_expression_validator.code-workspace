@@ -5,6 +5,15 @@
     }
   ],
   "settings": {
-    "python.linting.flake8Enabled": false
+    "python.linting.flake8Enabled": false,
+    "runItOn": {
+      "commands": [
+        {
+          "match": "\\.py$",
+          "isAsync": true,
+          "cmd": "[[ ${fileDirname} == ${workspaceRoot}/src/*  ]] &&  pytest `echo ${fileDirname}| sed s'|/src/|/tests/|'`; [[ ${file} == ${workspaceRoot}/tests/*  ]] && pytest ${file}"
+        }
+      ]
+    }
   }
 }
