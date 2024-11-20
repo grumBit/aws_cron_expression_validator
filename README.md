@@ -41,7 +41,7 @@ from aws_cron_expression_validator.validator import AWSCronExpressionValidator, 
 my_expression = "0 180 ? * MON-FRI *"
 try:
     AWSCronExpressionValidator.validate(my_expression)
-except AWSCronExpressionMinuteError:
+except AWSCronExpressionMinuteError as e:
     print(f"Oh no! My expression has an invalid minute field: {e}")
 except ValueError as e:
     print(f"Oh no! My expression was invalid: {e}")
