@@ -1,5 +1,10 @@
 # Release History
 
+### v.1.15 [2025-11-26]
+
+- New;
+  - Drop back to oldest supported version of Python.
+
 ### v.1.14 [2025-11-26]
 
 - New;
