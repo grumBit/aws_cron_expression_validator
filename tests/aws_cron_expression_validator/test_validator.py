@@ -199,10 +199,12 @@ class TestAWSCronExpressionValidator(TestCase):
             "15 12 * * ? *",  # Fire at 12:15pm, on every day
             "0 8 1 * ? *",  # Fire at 8am on the first day of every month
             "1/5 8-17 ? * Mon-Fri *",  # Fire every 5 minutes, starting on the 1st minute
-            # (i.e. 1st, 6th, 11th, 16th, 21st, 26th, 31st, 36th, 41st, 46th, 51st & 56th minutes), from 8am to 5pm, Mondays to Fridays
+            # (i.e. 1st, 6th, 11th, 16th, 21st, 26th, 31st, 36th, 41st, 46th, 51st & 56th minutes),
+            # from 8am to 5pm, Mondays to Fridays
             "0 9 ? * 2#1 *",  # Fire at 9am, on the 1st Monday of the every month
             "0 07/12 ? * * *",  # Fire every 12 hours, starting on the 7th hour (i.e. 7am and 7pm), every day.
-            "10,20,30,40 07/12 ? * * *",  # Fire on the 10th, 20th, 30th & 40th minutes, every 12 hours, starting on the 7th hour (i.e. 7am and 7pm), every day.
+            "10,20,30,40 07/12 ? * * *",  # Fire on the 10th, 20th, 30th & 40th minutes, every 12 hours, starting
+            # on the 7th hour (i.e. 7am and 7pm), every day.
             "10 10,15,20,23 ? * * *",  # Fire at 10:10am, 3:10pm, 8:10pm & 11:10pm, every day
             "10 10 15,30,31 * ? *",  # Fire at 10:10am on the 15th, 30th & 31st day of every month
             "10 10 15 JAN,JUL,DEC ? *",  # Fire at 10:10am on the 15th day of January, July and December
