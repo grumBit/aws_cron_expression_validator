@@ -32,7 +32,6 @@ class AWSCronExpressionDayOfWeekError(AWSCronExpressionError):
 
 
 class AWSCronExpressionValidator:
-
     """
     Validates these AWS EventBridge cron expressions, which are similar to, but not compatible with standard
     unix cron expressions:

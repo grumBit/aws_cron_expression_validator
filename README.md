@@ -10,7 +10,7 @@
 
 # AWSCronExpressionValidator
 
-Validates these [AWS EventBridge cron expressions](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html#eb-cron-expressions), which are similar to, but not compatible with Unix style cron expressions;
+Validates these [AWS EventBridge cron expressions](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cron-expressions.html), which are similar to, but not compatible with Unix style cron expressions;
 
 | Field        | Values          | Wildcards      |
 | :----------- | :-------------- | :------------- |
@@ -21,7 +21,7 @@ Validates these [AWS EventBridge cron expressions](https://docs.aws.amazon.com/e
 | Day-of-week  | 1-7 or SUN-SAT  | , - \* ? L #   |
 | Year         | 1970-2199       | , - \* /       |
 
-_NB: It appears AWS is supporting the Quartz Job Scheduler cron expressions. More details than AWS provides is available in the [Cron Trigger Tutorial](http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html)._
+- It appears AWS's wildcard support borrows heavily from Quartz Job Scheduler cron expressions. More documentation about wildcard handling than AWS provides is available in the [Cron Trigger Tutorial](http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html). _NB: AWS doesn't support seconds (i.e. AWS has 6 fields, while Quartz has 7), so ignore the first field in the Quartz documenation._
 
 This was inspired by Niloy Chakraborty's [AWSCronValidator.py](https://gist.github.com/ultrasonex/e1fdb8354408a56df91aa4902d17aa6a) project.
 

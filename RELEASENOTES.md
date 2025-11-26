@@ -1,5 +1,17 @@
 # Release History
 
+### v.1.15 [2025-11-26]
+
+- New;
+  - Drop back to oldest supported version of Python.
+
+### v.1.14 [2025-11-26]
+
+- New;
+  - Upgrade of Python from 3.7 to 3.13, and upgrade to latest packages.
+- Fixes;
+  - [Address security alert from dependabot: Black vulnerable to Regular Expression Denial of Service (ReDoS)](https://github.com/grumBit/aws_cron_expression_validator/pull/27) when running the Black linter. _NB: The vulnerability was only related to linting during development. The aws-cron-expression-validator package itself was not impacted._
+
 ### v1.1.13 [2024-02-08]
 
 - Documentation change only;
