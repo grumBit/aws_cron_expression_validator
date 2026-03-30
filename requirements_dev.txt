@@ -16,6 +16,8 @@ coverage[toml]==7.12.0
     # via pytest-cov
 dill==0.4.0
     # via pylint
+exceptiongroup==1.3.1
+    # via pytest
 iniconfig==2.3.0
     # via pytest
 isort==7.0.0
@@ -45,7 +47,7 @@ pluggy==1.6.0
     # via
     #   pytest
     #   pytest-cov
-pygments==2.19.2
+pygments==2.20.0
     # via pytest
 pylint==4.0.3
     # via -r requirements_dev.in
@@ -59,7 +61,19 @@ pytest-cov==7.0.0
     # via -r requirements_dev.in
 pytokens==0.3.0
     # via black
+tomli==2.4.1
+    # via
+    #   black
+    #   build
+    #   coverage
+    #   mypy
+    #   pylint
+    #   pytest
 tomlkit==0.13.3
     # via pylint
 typing-extensions==4.15.0
-    # via mypy
+    # via
+    #   astroid
+    #   black
+    #   exceptiongroup
+    #   mypy
